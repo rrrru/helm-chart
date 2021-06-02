@@ -3,7 +3,7 @@ entries:
   cluster-issuer:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2021-05-31T01:26:04.625178+03:00"
+    created: "2021-06-02T16:55:54.099427+03:00"
     description: cluster-issuer chart
     digest: 18b8029ada10c2ec2de53a6ba972e184f0e29beb0d0d6375ad61a3a51bcded9c
     name: cluster-issuer
@@ -13,7 +13,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2021-05-31T01:26:04.623828+03:00"
+    created: "2021-06-02T16:55:54.098726+03:00"
     description: cluster-issuer chart
     digest: 0b0347bb5bb0c85799697195cdc5095d68e1b132b3b0b999b37c677355f285df
     name: cluster-issuer
@@ -24,12 +24,12 @@ entries:
   hello-kubernetes:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2021-05-31T01:26:04.626841+03:00"
+    created: "2021-06-02T16:55:54.100487+03:00"
     description: A demo application for a Kubernetes cluster.
-    digest: eb0f586c38f8168a69fd3bf912e26795825f48471e804c6072de5cc5dc146e69
+    digest: 03a9487b36b972e02d8977d399df0024f6ad7fde6a0eb2c9ee488b56a6b15330
     name: hello-kubernetes
     type: application
     urls:
     - https://rrrru.github.io/helm-chart/hello-kubernetes/hello-kubernetes-1.0.0.tgz
     version: 1.0.0
-generated: "2021-05-31T01:26:04.622259+03:00"
+generated: "2021-06-02T16:55:54.097892+03:00"
