@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: paulbouwer/hello-k8s
+  repository: paulbouwer/hello-kubernetes
   tag: 1.10
   pullPolicy: Always
 

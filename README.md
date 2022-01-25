@@ -28,6 +28,8 @@ helm install rrrru/<helm chart name> --version <helm chart version>
 
 helm install rrrru/cluster-issuer --set "email=you@yourhost.com" --version 1.0.3
 
-helm upgrade -i rrrru/hello-k8s --set "ingress.hosts[0].host=yourhost.com" \
-    --set "ingress.tls[0].hosts[0].hosts=yourhost.com"--version 0.1.0
+helm upgrade -i -n default hello-k8s rrrru/hello-k8s --set "ingress.hosts[0].host=example.com,ingress.hosts[0].paths[0].path=/" \
+    --set "ingress.tls[0].hosts={example.com}" --set "ingress.tls[0].secretName=letsencrypt-prod-hello-k8s" \
+	--set "image.repository=paulbouwer/hello-kubernetes" --version 0.1.0 --dry-run
+
 ```
