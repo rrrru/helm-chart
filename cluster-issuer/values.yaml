@@ -1,2 +1,5 @@
 email: name@example.com
-class: nginx
+cfEmail: name@example.com
+cfApiToken: xxx
+secretName: cloudflare-api-token
+secretKey: api-token

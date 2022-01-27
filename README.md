@@ -26,10 +26,26 @@ helm repo update
 # install chart
 helm install rrrru/<helm chart name> --version <helm chart version>
 
-helm install rrrru/cluster-issuer --set "email=you@yourhost.com" --version 1.0.3
+
+### http01 issuer
+helm install rrrru/cluster-issuer --set "email=you@yourhost.com" --version 1.0.2
+
+### dns01 issuer
+helm upgrade --install -n cert-manager cluster-issuer rrrru/cluster-issuer --version 1.0.3 \
+--set "email=you@yourhost.com" --set "cfApiToken=xxxxxxxxxx" \
+--set "cfEmail=you@yourhost.com
+
+### dns01 issuer notes:
+Tokens can be created at User Profile > API Tokens > API Tokens. The following settings are recommended:
+
+Permissions:
+Zone - DNS - Edit
+Zone - Zone - Read
+Zone Resources:
+Include - All Zones
 
 helm upgrade -i -n default hello-k8s rrrru/hello-k8s --set "ingress.hosts[0].host=example.com,ingress.hosts[0].paths[0].path=/" \
-    --set "ingress.tls[0].hosts={example.com}" --set "ingress.tls[0].secretName=letsencrypt-prod-hello-k8s" \
-	--set "image.repository=paulbouwer/hello-kubernetes" --version 0.1.0 --dry-run
+--set "ingress.tls[0].hosts={example.com}" --set "ingress.tls[0].secretName=letsencrypt-prod-hello-k8s" \
+--set "image.repository=paulbouwer/hello-kubernetes" --version 0.1.0 --dry-run
 
 ```

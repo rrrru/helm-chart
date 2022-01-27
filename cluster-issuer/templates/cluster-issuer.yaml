@@ -9,23 +9,17 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-    - http01:
-        ingress:
-          class: nginx
-      selector: {}
+    - dns01:
+        cloudflare:
+          email: {{ required "cfEmail is required" .Values.cfEmail | quote }}
+          apiTokenSecretRef:
+            name: {{ .Values.secretName }}
+            key: {{ .Values.secretKey }}
 ---
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+apiVersion: v1
+data:
+  api-token: {{ required "cfApiToken is required" .Values.cfApiToken | b64enc | quote }}
+kind: Secret
 metadata:
-  name: letsencrypt-staging
-spec:
-  acme:
-    email: {{ required "email is required" .Values.email | quote }}
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-staging
-    solvers:
-    - http01:
-        ingress:
-          class: nginx
-      selector: {}
+  name: {{ .Values.secretName }}
+type: Opaque
