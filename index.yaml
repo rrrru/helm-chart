@@ -3,7 +3,7 @@ entries:
   cluster-issuer:
   - apiVersion: v2
     appVersion: 1.0.3
-    created: "2023-07-14T13:15:01.276901+03:00"
+    created: "2023-07-14T13:17:11.306604+03:00"
     description: cluster-issuer chart
     digest: f94d6b48ed46191a2e38dd62704c9dcd65fd52c97e9e92612580b2f65b2ac6b3
     name: cluster-issuer
@@ -13,7 +13,7 @@ entries:
     version: 1.0.3
   - apiVersion: v2
     appVersion: 1.0.2
-    created: "2023-07-14T13:15:01.276631+03:00"
+    created: "2023-07-14T13:17:11.306456+03:00"
     description: cluster-issuer chart
     digest: 33fda5474bd871bf02f9a0be8c2ba87dda9c424598b2d6e534ae2a4c40b51d71
     name: cluster-issuer
@@ -23,7 +23,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2023-07-14T13:15:01.276468+03:00"
+    created: "2023-07-14T13:17:11.306218+03:00"
     description: cluster-issuer chart
     digest: 18b8029ada10c2ec2de53a6ba972e184f0e29beb0d0d6375ad61a3a51bcded9c
     name: cluster-issuer
@@ -33,7 +33,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-14T13:15:01.276325+03:00"
+    created: "2023-07-14T13:17:11.306059+03:00"
     description: cluster-issuer chart
     digest: 0b0347bb5bb0c85799697195cdc5095d68e1b132b3b0b999b37c677355f285df
     name: cluster-issuer
@@ -50,7 +50,7 @@ entries:
           image: mintel/dex-k8s-authenticator:1.4.0
     apiVersion: v2
     appVersion: 1.4.0
-    created: "2023-07-14T13:15:01.27738+03:00"
+    created: "2023-07-14T13:17:11.307092+03:00"
     description: A helper web-app which talks to one or more Dex Identity services
       to generate kubectl commands for creating and modifying a kubeconfig.
     digest: a31e87a95c97ce8a3a3d338c238b487e6bf41e8bd8897365f46e1f1725f589bc
@@ -77,7 +77,7 @@ entries:
   gangway:
   - apiVersion: v2
     appVersion: v3.2.0
-    created: "2023-07-14T13:15:01.277791+03:00"
+    created: "2023-07-14T13:17:11.307602+03:00"
     description: An application that can be used to easily enable authentication flows
       via OIDC for a kubernetes cluster.
     digest: 29373d07ba5876bb2cea29a12a89ad289a4aa40a83fa45bc6aff35af84f56aba
@@ -89,7 +89,7 @@ entries:
   hello-k8s:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2023-07-14T13:15:01.27813+03:00"
+    created: "2023-07-14T13:17:11.307948+03:00"
     description: A Helm chart for Kubernetes
     digest: 72c7842d9e8f1d421d71bc73847c780f6dcdfe5e0ab63eb15a7a7412651518b8
     name: hello-k8s
@@ -99,7 +99,7 @@ entries:
   hello-kubernetes:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-07-14T13:15:01.278489+03:00"
+    created: "2023-07-14T13:17:11.308309+03:00"
     description: A demo application for a Kubernetes cluster.
     digest: 03a9487b36b972e02d8977d399df0024f6ad7fde6a0eb2c9ee488b56a6b15330
     name: hello-kubernetes
@@ -107,15 +107,4 @@ entries:
     urls:
     - https://rrrru.github.io/helm-chart/hello-kubernetes/hello-kubernetes-1.0.0.tgz
     version: 1.0.0
-  pgbouncer:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2023-07-14T13:15:01.27887+03:00"
-    description: PgBouncer chart
-    digest: df8e86b1bc29bb1e632431eda48b3d6f43d98e2db873a2ada54b3c453b3d5bb1
-    home: https://github.com/cradlepoint/kubernetes-helm-chart-pgbouncer
-    name: pgbouncer
-    urls:
-    - https://rrrru.github.io/helm-chart/pgbouncer/pgbouncer-1.0.15.tgz
-    version: 1.0.15
-generated: "2023-07-14T13:15:01.275901+03:00"
+generated: "2023-07-14T13:17:11.305752+03:00"
