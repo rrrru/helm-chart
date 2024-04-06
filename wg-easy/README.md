@@ -1,26 +1,34 @@
-# WireGuard Easy
 
-## Introduction
+Wg-easy Helm Chart
+===========
 
-The WireGuard Easy deploys a vpn solution, check out:
-- https://github.com/wg-easy/wg-easy
+A [wg-easy](https://github.com/WeeJeWel/wg-easy) Wireguard server Helm Chart.
 
-## Installing the Chart
-
-To install the chart with the release name `wg-easy` run:
-
-```bash
-$ helm repo add wg-easy https://raw.githubusercontent.com/hansehe/wg-easy-helm/master/helm/charts
-$ helm install wg-easy wg-easy/wg-easy
-```
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-
-```bash
-$ helm install wg-easy -f values.yaml wg-easy/wg-easy
-```
 
 ## Configuration
 
-Find all possible configuration values here:
-- https://github.com/hansehe/wg-easy-helm/blob/master/helm/wg-easy/values.yaml
+The following table lists the configurable parameters of the Wg-easy chart and their default values.
+
+| Parameter                | Description             | Default        |
+| ------------------------ | ----------------------- | -------------- |
+| `web.password` | When set, requires a password when logging in to the Web UI. | `""` |
+| `web.service.type` | Service Type to create for the wg-easy front-end service. | `"ClusterIP"` |
+| `web.service.port` | The TCP port of the wg-easy front-end for Wireguard. | `51821` |
+| `web.service.externalTrafficPolicy` | Wireguard Service externalTrafficPolicy | `Local` |
+| `web.service.loadBalancerIP` | Wireguard Service externalTrafficPolicy | `null` |
+| `wireguard.service.type` | Service Type to create for the Wireguard VPN service | `"ClusterIP"` |
+| `wireguard.service.port` | The UDP port for the Wireguard VPN service. | `51820` |
+| `wireguard.service.externalTrafficPolicy` | Wireguard Service externalTrafficPolicy | `Local` |
+| `wireguard.host` | The public hostname or IP address of your VPN server. Required. | `""` |
+| `wireguard.clientAddrRange` | Client IP address range. | `"10.8.0.x"` |
+| `wireguard.dns` | DNS server clients will use. | `"1.1.1.1"` |
+| `wireguard.allowedIps` | Allowed IP's clients will use. | `"0.0.0.0/0, ::/0"` |
+| `wireguard.persistentKeepalive` | Value in seconds to keep the "connection" open. | `0` |
+| `ingress.enabled` | Enable Ingress creation if true. | `false` |
+| `ingress.annotations` | Annotations to be applied to the Ingress object when Ingress is enabled. | `{}` |
+| `ingress.hosts` | Hostnames to use with Ingress, when enabled. | `[{"host": "chart-example.local", "paths": []}]` |
+| `persistence.enabled` | When set to true, this will enable persistence. | `false` |
+| `persistence.size` | Volume size when using persistence. | `"100Mi"` |
+| `persistence.annotations` | Persistent Volume Annotations | `{}` |
+| `persistence.accessModes` | Persistent Volume Access Mode | `["ReadWriteOnce"]` |
+| `persistence.subPath` | Persistent Volume sub-path | `""` |

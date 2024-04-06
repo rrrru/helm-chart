@@ -2,75 +2,90 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-enabled: true
 replicaCount: 1
 
 image:
   repository: ghcr.io/wg-easy/wg-easy
+  tag: 12
   pullPolicy: IfNotPresent
-  versionOverride: "*"
 
-healthCheckUrl: /
+
+# kubectl create secret generic wg-ui-password --from-literal=webpassword=password
+web:
+  # Set password.secretName if you want to set a web password
+  password:
+    secretName: "wg-ui-password"
+  service:
+    type: ClusterIP
+    # Modify this port when wishing to change the web port the UI is accessible through
+    port: 51821
+    # This port value should likely not be changed since wg-easy is hard coded to 51821
+    targetPort: 51821
+    annotations: {}
+
+wireguard:
+  service:
+    type: ClusterIP
+    # Modify this port when wishing to change the service port systems connect to
+    port: 51820
+    # This port value should likely not be changed since wg-easy iptables dport is hard coded to 51820
+    targetPort: 51820
+    annotations: {}
+
+  # Wireguard host is required and used when creating client config
+  host: "wge.example.com"
+  clientAddrRange: 10.163.0.x
+  dns: 1.1.1.1
+  allowedIps: "0.0.0.0/0, ::/0"
+  persistentKeepalive: 0
+  #mtu: 1420
+  #postUp: |-
+    # Put Wireguard post up commands here, here per line
+  #postDown: |-
+    # Put Wireguard post down commands here, here per line
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
-terminationGracePeriodSeconds: 10
-environmentVariables:
-  WG_HOST: localhost # WAN IP, or a Dynamic DNS hostname.
-  PASSWORD: password # Password for the UI.
 
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Annotations to add to the service account
+  annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: wg-easy-sa
-
-podAnnotations: {}
+  name:
 
 podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext:
-  capabilities:
-    add:
-      - NET_ADMIN
-      - SYS_MODULE
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 51821
-
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
     # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     # nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
   hosts:
-    - host: wg-easy.local
+    - host: wge.example.com
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: wg-easy-tls
-  #    hosts:
-  #      - wg-easy.local
+  tls:
+   - secretName: wg-easy-tls
+     hosts:
+       - wge.example.com
+
+persistence:
+  enabled: false
+  size: 100Mi
+  annotations: {}
+  # storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  subPath: ""
 
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -78,18 +93,9 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-nodeSelector: {}
+nodeSelector: 
+  role: storage
 
 tolerations: []
 
 affinity: {}
-
-volume:
-  enabled: true
-  className: ""
-  size: 100m
-  annotations:
-    helm.sh/resource-policy: "keep"
-
-tests:
-  enabled: true

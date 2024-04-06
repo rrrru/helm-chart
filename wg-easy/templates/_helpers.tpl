@@ -37,19 +37,10 @@ Common labels
 {{- define "wg-easy.labels" -}}
 helm.sh/chart: {{ include "wg-easy.chart" . }}
 {{ include "wg-easy.selectorLabels" . }}
-app.kubernetes.io/version: "{{ include "wg-easy.wg-easyVersion" . }}"
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end -}}
-
-{{/*
-Version is either the Chart's AppVersion or the image versionOverride, if specified
-*/}}
-{{- define "wg-easy.wg-easyVersion" -}}
-{{- if ne .Values.image.versionOverride "*" -}}
-{{- .Values.image.versionOverride -}}
-{{- else -}}
-{{ .Chart.AppVersion }}
-{{- end -}}
 {{- end -}}
 
 {{/*

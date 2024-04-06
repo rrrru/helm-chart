@@ -1,26 +1,57 @@
-{{- if .Values.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "wg-easy.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "wg-easy.fullname" . }}-web
   labels:
     {{- include "wg-easy.labels" . | nindent 4 }}
-  {{- with .Values.service.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+  {{- range $key, $value := .Values.web.service.annotations }}
+    {{ $key }}: {{ $value | quote }}
   {{- end }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.web.service.type }}
+{{- if .Values.web.service.clusterIP }}
+  clusterIP: {{ .Values.web.service.clusterIP }}
+{{- end }}
+{{- if .Values.web.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.web.service.loadBalancerIP }}
+{{- end }}
+{{- if .Values.web.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.web.service.externalTrafficPolicy }}
+{{- end }}
   ports:
-    - port: 51820
-      targetPort: udp-vpn
-      protocol: UDP
-      name: udp-vpn
-    - port: 51821
-      targetPort: http-ui
+    - port: {{ .Values.web.service.port }}
+      targetPort: {{ .Values.web.service.targetPort }}
       protocol: TCP
-      name: http-ui
+      name: http
   selector:
     {{- include "wg-easy.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wg-easy.fullname" . }}-wg
+  labels:
+    {{- include "wg-easy.labels" . | nindent 4 }}
+  annotations:
+  {{- range $key, $value := .Values.wireguard.service.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+spec:
+  type: {{ .Values.wireguard.service.type }}
+{{- if .Values.wireguard.service.clusterIP }}
+  clusterIP: {{ .Values.wireguard.service.clusterIP }}
 {{- end }}
+{{- if .Values.wireguard.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.wireguard.service.loadBalancerIP }}
+{{- end }}
+{{- if .Values.wireguard.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.wireguard.service.externalTrafficPolicy }}
+{{- end }}
+  ports:
+    - port: {{ .Values.wireguard.service.port }}
+      targetPort: {{ .Values.wireguard.service.targetPort }}
+      protocol: UDP
+      name: wireguard
+  selector:
+    {{- include "wg-easy.selectorLabels" . | nindent 4 }}
