@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/wg-easy/wg-easy
-  tag: 12
+  tag: 14
   pullPolicy: IfNotPresent
 
 
@@ -34,7 +34,7 @@ wireguard:
 
   # Wireguard host is required and used when creating client config
   host: "wge.example.com"
-  clientAddrRange: 10.163.0.x
+  clientAddrRange: 10.177.0.x
   dns: 1.1.1.1
   allowedIps: "0.0.0.0/0, ::/0"
   persistentKeepalive: 0
@@ -93,8 +93,7 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-nodeSelector: 
-  role: storage
+nodeSelector: {}
 
 tolerations: []
 

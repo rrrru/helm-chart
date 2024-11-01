@@ -41,11 +41,11 @@ spec:
             - name: WG_HOST
               value: "{{ .Values.wireguard.host }}"
             {{- if .Values.web.password }}
-            - name: PASSWORD
+            - name: PASSWORD_HASH
               valueFrom:
                 secretKeyRef:
                   name: "{{ .Values.web.password.secretName }}"
-                  key: webpassword
+                  key: webpassword_hash
             {{- end }}
             {{- if .Values.wireguard.service.port }}
             - name: WG_PORT
